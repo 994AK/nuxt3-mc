@@ -31,4 +31,5 @@
         "vite",
         "vueuse"
     ],
+    "editor.wordBasedSuggestions": false,
 }

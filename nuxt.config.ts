@@ -4,7 +4,6 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@pinia/nuxt',
     '@nuxtjs/color-mode',
-    'nuxt-icon',
     'nuxt-headlessui',
     'nuxt-vitest',
     '@nuxt/devtools'
