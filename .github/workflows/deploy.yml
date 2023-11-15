@@ -30,11 +30,22 @@ jobs:
         with:
           host: 159.75.79.184
           username: ubuntu
-          key: ${{ secrets.SERVER_KEY }} 
+          key: ${{ secrets.SERVER_KEY }}
           port: 22
           debug: true
           source: "./.output/" # 或你的构建目录
           target: "~/minecraft_server/blog"
+
+      - name: Restart PM2 process
+        uses: appleboy/ssh-action@master
+        with:
+          host: 159.75.79.184
+          username: ubuntu
+          key: ${{ secrets.SERVER_KEY }}
+          port: 22
+          script: |
+            cd ~/minecraft_server/blog
+            pm2 restart all # 或者指定特定的应用名
 
     # 添加更多步骤来部署到你的服务器
     # ...
