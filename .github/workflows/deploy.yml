@@ -11,33 +11,40 @@ jobs:
     runs-on: ubuntu-latest  # 定义运行工作流的环境
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2  # 检出你的代码
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '20'  # 定义 Node.js 版本
-
-    - name: Install dependencies
-      run: yarn install  # 安装依赖
-
-    - name: Build
-      run: yarn run build  # 构建你的 Nuxt3 应用
-
     - name: Debug SSH Key
-      run: echo "${{ secrets.SERVER_KEY }}"  # 替换为您的SSH私钥Secrets的名称
+      run: echo "${{ secrets.SERVER_KEY }}"
+      
+    - name: List GitHub Secrets
+      run: |
+        for secret in ${{ toJson(secrets) }}; do
+          echo $secret
+        done
 
-    - name: Copy files to the server
-      uses: appleboy/scp-action@master
-      with:
-        host: 159.75.79.184
-        username: ubuntu
-        key: ${{ secrets.SERVER_KEY }}  # 更改为你在 GitHub Secrets 中设置的名称
-        port: 22
-        debug: true
-        source: "./.output/"  # 或你的构建目录
-        target: "~/minecraft_server/blog"
+
+    # - name: Checkout code
+    #   uses: actions/checkout@v2  # 检出你的代码
+
+    # - name: Set up Node.js
+    #   uses: actions/setup-node@v2
+    #   with:
+    #     node-version: '20'  # 定义 Node.js 版本
+
+    # - name: Install dependencies
+    #   run: yarn install  # 安装依赖
+
+    # - name: Build
+    #   run: yarn run build  # 构建你的 Nuxt3 应用
+
+    # - name: Copy files to the server
+    #   uses: appleboy/scp-action@master
+    #   with:
+    #     host: 159.75.79.184
+    #     username: ubuntu
+    #     key: ${{ secrets.SERVER_KEY }}  # 更改为你在 GitHub Secrets 中设置的名称
+    #     port: 22
+    #     debug: true
+    #     source: "./.output/"  # 或你的构建目录
+    #     target: "~/minecraft_server/blog"
 
 
     # 添加更多步骤来部署到你的服务器
