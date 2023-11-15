@@ -25,7 +25,8 @@ jobs:
     - name: Build
       run: yarn run build  # 构建你的 Nuxt3 应用
 
-          # ...之前的步骤
+    - name: Debug SSH Key
+      run: echo "${{ secrets.SERVER_KEY }}"  # 替换为您的SSH私钥Secrets的名称
 
     - name: Copy files to the server
       uses: appleboy/scp-action@master
