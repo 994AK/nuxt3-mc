@@ -8,7 +8,7 @@
             class="item text-xl cursor-pointer"
             @click="() => updateSlider(0)"
           >
-            在线玩家123
+            在线玩家
           </div>
           <!-- <div class="item text-xl cursor-pointer" @click="() => updateSlider(1)">
           金币玩家
