@@ -34,6 +34,7 @@ jobs:
         username: ubuntu
         key: ${{ secrets.SERVER_KEY }}  # 更改为你在 GitHub Secrets 中设置的名称
         port: 22
+        debug: true
         source: "./.output/"  # 或你的构建目录
         target: "~/minecraft_server/blog"
 
