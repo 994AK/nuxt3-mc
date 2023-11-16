@@ -1,68 +1,28 @@
 <template>
-  <div class="bg-teal-300">
-    <div class="mx-auto max-w-4xl py-10">
-      <div class="relative border-b-slate-300 py-3 px-5">
-        <!-- 标签项 -->
-        <div class="flex gap-10" ref="tabs">
-          <div
-            class="item text-xl cursor-pointer"
-            @click="() => updateSlider(0)"
-          >
-            在线玩家
-          </div>
-          <!-- <div class="item text-xl cursor-pointer" @click="() => updateSlider(1)">
-          金币玩家
-        </div> -->
-        </div>
-        <!-- 滑块 -->
-        <div
-          class="absolute bottom-0 h-1 bg-rose-600 transition-all duration-200"
-          :style="{
-            width: sliderStyle.width + 'px',
-            left: sliderStyle.left + 'px',
-          }"
-        ></div>
-      </div>
-      <div>
-        <div class="flex flex-wrap gap-5 py-3 px-5" v-if="pending">
-          <div
-            v-for="i in 6"
-            :key="i"
-            class="flex items-center  w-[100%] md:w-[30%] border p-4 gap-4  bg-slate-50 rounded-xl"
-          >
-            <div class="rounded-full bg-gray-300 h-16 w-16"></div>
-            <div class="flex-1 space-y-6 py-1">
-              <div class="h-4 bg-gray-300 rounded"></div>
-              <div class="h-4 bg-gray-300 rounded w-5/6"></div>
-            </div>
-          </div>
-        </div>
+  <div class="">
+    <div class="container w-screen h-screen bg-white md:px-20 flex flex-col  md:flex-row gap-5">
+      <div class="flex-1 md:flex-[2] pt-12 pl-4  md:pt-44 md:pl-32 ">
+        <div class="flex flex-col gap-2 md:gap-5 md:w-1/2">
+          <span class="text-zinc-950 font-serif text-3xl md:text-7xl">Yuhua</span> 
+          <span class="font-serif text-xl md:text-5xl text-sky-400">服务器</span> 
+          <span class="font-serif text-lg md:text-3xl text-zinc-500 leading-10">
+            ⛱️我希望我的服务器不存在熊孩子，可以互相友爱的，共同进步，共同发展
+          </span>
 
-        <div
-          v-if="!pending && posts && posts.players && posts.players.list"
-          class="flex flex-wrap gap-7 py-5 px-5"
-        >
-          <div
-            v-for="(player, index) in posts.players.list"
-            :key="index"
-            class="flex items-center w-[100%] md:w-[30%] border p-4 gap-4 bg-slate-50 rounded-xl transition-all duration-300"
-          >
-            <img
-              :src="`https://mc-heads.net/avatar/${player.name_raw}`"
-              alt="Your Avatar"
-              class="rounded-full border h-16 w-16"
-            />
-            <div class="text-xl break-all">{{ player.name_raw }}</div>
-          </div>
-        </div>
-      </div>
+          <div class="w-28 flex justify-center items-center p-2 text-xl text-white bg-cyan-700 rounded-lg cursor-pointer active:text-slate-200" @click="navigateToPlayer">查询玩家</div>
+        </div> 
+      </div>      
+      <div class="flex-[1] flex justify-center items-center ">
+        <img class="object-cover w-[300px] h-[300px] md:w-[400px] md:h-[400px] rounded-3xl " src="https://common.mentorsc.com/jsy-common-attachment/2023-11-16/1725090800095858688-mc-bg.png"  />  
+      </div>   
+    </div>
+    <div id="player-details" class="container w-screen h-screen md:px-20 md:pl-32 bg-teal-300">
+      <players-list :posts="posts" :pending="pending" />
     </div>
   </div>
 </template>
 
 <script setup>
-const sliderStyle = ref({ width: 0, left: 0 });
-const tabs = ref(null);
 const formData = ref({
   page: 1,
   per_page: 10,
@@ -70,6 +30,8 @@ const formData = ref({
     search_type: "LastLoginTime",
   },
 });
+
+const router = useRouter();
 
 const { pending, data: posts } = await useLazyFetch(
   "https://api.mcstatus.io/v2/status/java/66aserver.zhongbai233.top",
@@ -86,19 +48,12 @@ const { pending, data: posts } = await useLazyFetch(
   }
 );
 
-const updateSlider = (index) => {
-  if (tabs.value && tabs.value.children[index]) {
-    const tab = tabs.value.children[index];
-    sliderStyle.value = {
-      width: tab.offsetWidth - 20,
-      left: tab.offsetLeft + 10,
-    };
-  }
-};
 
-onMounted(() => {
-  updateSlider(0); // 初始设置滑块位置
-});
+function navigateToPlayer() {
+  router.push({ hash: '#player-details' });
+}
+
+
 </script>
 
 <style scoped>
