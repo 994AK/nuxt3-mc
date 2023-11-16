@@ -24,11 +24,11 @@
         ></div>
       </div>
       <div>
-        <div class="flex flex-wrap gap-5  py-3 px-5" v-if="pending">
+        <div class="flex flex-wrap gap-5 py-3 px-5" v-if="pending">
           <div
             v-for="i in 6"
             :key="i"
-            class="flex items-center w-full md:w-1/4 bg-white border p-4 gap-4"
+            class="flex items-center  w-[100%] md:w-[30%] border p-4 gap-4  bg-slate-50 rounded-xl"
           >
             <div class="rounded-full bg-gray-300 h-16 w-16"></div>
             <div class="flex-1 space-y-6 py-1">
@@ -37,11 +37,15 @@
             </div>
           </div>
         </div>
-        <div class="flex flex-wrap gap-7 py-5 px-5" v-else-if="!pending && posts && posts.players && posts.players.list">
+
+        <div
+          v-if="!pending && posts && posts.players && posts.players.list"
+          class="flex flex-wrap gap-7 py-5 px-5"
+        >
           <div
             v-for="(player, index) in posts.players.list"
             :key="index"
-            class="flex items-center w-[100%] md:w-[30%] border p-4 gap-4 bg-slate-50 rounded-xl"
+            class="flex items-center w-[100%] md:w-[30%] border p-4 gap-4 bg-slate-50 rounded-xl transition-all duration-300"
           >
             <img
               :src="`https://mc-heads.net/avatar/${player.name_raw}`"
