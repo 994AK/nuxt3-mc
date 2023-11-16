@@ -44,7 +44,7 @@
             class="flex items-center w-[100%] md:w-[30%] border p-4 gap-4 bg-slate-50 rounded-xl"
           >
             <img
-              :src="`https://api.mineatar.io/face/${player.uuid}?scale=16`"
+              :src="`https://mc-heads.net/avatar/${player.name_raw}`"
               alt="Your Avatar"
               class="rounded-full border h-16 w-16"
             />
