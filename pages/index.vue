@@ -68,7 +68,7 @@ const formData = ref({
 });
 
 const { pending, data: posts } = await useLazyFetch(
-  "https://api.mcstatus.io/v2/status/java/52mc.top:911",
+  "https://api.mcstatus.io/v2/status/java/66aserver.zhongbai233.top",
   {
     lazy: true,
     server: false,
